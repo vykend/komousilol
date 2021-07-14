@@ -18,23 +18,17 @@ const pickRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 const canvas = document.getElementById("picture");
 const ctx = canvas.getContext("2d");
-const font = new FontFace("Bebas Neue", "url(public/BebasNeue-Bold.ttf)");
-
-const initFont = async () => {
-  await font.load();
-  document.fonts.add(font);
-};
 
 const unrolledGenerators = generators.flatMap(({ url, weight }) => Array(weight).fill(url));
 
 const initImage = async (customText) => {
   const loadLogo = () => {
     const logo = new Image();
-    logo.src = "public/logo.png";
+    logo.src = "public/logo_kscm.png";
     logo.addEventListener("load", () => {
-      ctx.drawImage(logo, 525, 20);
+      ctx.drawImage(logo, 0, 411);
       const linkSave = document.getElementById("save");
-      linkSave.setAttribute("download", "PirStanKampan.png");
+      linkSave.setAttribute("download", "KomunistiKampan.png");
       setTimeout(() => {
         linkSave.setAttribute("href", canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
       }, 500);
@@ -49,19 +43,19 @@ const initImage = async (customText) => {
     ctx.drawImage(image, 0, 0);
     loadLogo();
     const unsplitText = customText ?? pickRandom(claims);
-    const lines = splitText(unsplitText, 20).reverse();
-    const fontSize = lines.length < 5 ? 60 : 40;
-    ctx.font = `${fontSize}px 'Bebas Neue'`;
+    const lines = splitText(unsplitText, 20);
+    const fontSize = lines.length < 5 ? 40 : 30;
+    ctx.font = `bold ${fontSize}px Arial`;
     lines.forEach((line, index) => {
-      const x = 30;
-      const y = 685;
+      const x = 740;
+      const y = 30;
       const padding = 15;
       const lineHeight = padding + fontSize;
-      ctx.fillStyle = "#f9dc4d";
-      ctx.fillRect(x, y - (index * lineHeight), ctx.measureText(line).width + 2 * padding, lineHeight);
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(x - (ctx.measureText(line).width), (y + (index * lineHeight)), ctx.measureText(line).width + 2 * padding, lineHeight);
       ctx.textBaseline = "top";
       ctx.fillStyle = "black";
-      ctx.fillText(line, x + padding, y + padding - (index * lineHeight));
+      ctx.fillText(line, x - (ctx.measureText(line).width) + padding, y + padding/2 + (index * lineHeight));
     });
   });
 };
@@ -77,5 +71,5 @@ buttonCustom.onclick = () => {
   }
 };
 
-initFont();
+//initFont();
 initImage();
