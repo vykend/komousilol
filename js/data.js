@@ -13,6 +13,10 @@ export const generators = [
   { url: "https://source.unsplash.com/800x800/?puppy", weight: 1 },
   { url: "https://source.unsplash.com/800x800/?person", weight: 10 },
   { url: "https://source.unsplash.com/800x800/?face", weight: 10 },
+  { url: "https://source.unsplash.com/800x800/?tiananmen-square", weight: 10 },
+  { url: "https://source.unsplash.com/800x800/?china-communism", weight: 10 },
+  { url: "https://source.unsplash.com/800x800/?crime", weight: 10 },
+  { url: "https://source.unsplash.com/800x800/?fraud", weight: 10 },
 ];
 
 export default claims;
